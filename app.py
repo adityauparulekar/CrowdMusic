@@ -68,9 +68,7 @@ def join_room():
 
 @app.route('/get_users')
 def get_users():
-    usernames = []
-    for user in room.user_list:
-        usernames.append(user.username)
+    usernames = [user for user.username in room.user_list]
     
     return jsonify(usernames)
 
