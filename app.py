@@ -1,12 +1,30 @@
-from flask import Flask, render_template, redirect, url_for, send_from_directory, session
-from flask_socketio import SocketIO, join_room, leave_room, send, emit
+from flask import Flask, render_template, redirect, url_for, send_from_directory, session, jsonify
 
+import json
 import random
 import string
+
+
+class Room:
+    """ Room Representation """
+
+    def __init__(self, room_id):
+        self.id = room_id
+        self.user_list = []
+        self.song_queue = []
+
+
+class User:
+    """ User Representation """
+
+    def __init__(self, username):
+        self.name = username
+
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 rooms = {}
+users = {}
 
 
 def generate_room_id():
@@ -20,9 +38,21 @@ def generate_room_id():
             return id_tmp
 
 
-@app.route('/')
-def start():
-    return render_template('login.html')
+@app.route('/create_room', methods=['GET'])
+def create_room():
+    room_id = generate_room_id()
+    rooms[room_id] = Room(room_id)
+    data = {"room_id" : room_id}
+    return jsonify(data)
+
+@app.route('/join_room', methods=['POST'])
+def join_room():
+    data = request.json
+    user = User(data['username'])
+    return jsonify(data)
+
+    
+
 
 
 if __name__ == '__main__':
