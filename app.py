@@ -66,4 +66,8 @@ def join_room():
     room.add_user(user)
 
 
-@app.route('/song_vote')
+@app.route('/song_vote', methods = ['POST'])
+def song_vote():
+    data = request.json
+    room = rooms[data['room_id']]
+    
