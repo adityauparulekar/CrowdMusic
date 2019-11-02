@@ -23,7 +23,7 @@ class User:
 
     def __init__(self, username):
         self.name = username
-        self.voted = False
+        self.voted = []
 
 
 class Song:
@@ -70,7 +70,7 @@ def join_room():
 def get_users():
     usernames = []
     for user in room.user_list:
-        usernames.append(user)
+        usernames.append(user.username)
     
     return jsonify(usernames)
 
@@ -99,3 +99,9 @@ def get_song():
     returnSong = songs.pop(maxIndex)
     newData = {'song_url', returnSong.url}
     return jsonify(newData)
+
+@app.route('/song_queue', methods = ['GET'])
+def song_queue():
+    data = request.json
+    room = rooms[data['room_id']]
+
