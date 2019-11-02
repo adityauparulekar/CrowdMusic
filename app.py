@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, send_from_directory, session, jsonify
+from flask import Flask, render_template, redirect, url_for, send_from_directory, session, jsonify, request
 
 import json
 import random
@@ -22,7 +22,6 @@ class User:
 
 
 app = Flask(__name__)
-socketio = SocketIO(app)
 rooms = {}
 users = {}
 
@@ -50,10 +49,3 @@ def join_room():
     data = request.json
     user = User(data['username'])
     return jsonify(data)
-
-    
-
-
-
-if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=1232, debug=True)
