@@ -67,3 +67,11 @@ def join_room():
 
 
 @app.route('/song_vote')
+
+@app.route('/get_users')
+def get_users():
+    usernames = []
+    for user in room.user_list:
+        usernames.append(user)
+    
+    return jsonify(usernames)
