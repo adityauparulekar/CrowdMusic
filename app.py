@@ -70,4 +70,24 @@ def join_room():
 def song_vote():
     data = request.json
     room = rooms[data['room_id']]
-    
+    song = room.song_queue[data['song_id']]
+    song.votes += 1
+
+@app.route('/get_song', methods = ['GET'])
+def get_song():
+    data = request.json
+    room = rooms[data['room_id']]
+    songs = room.song_queue
+    maxVotes = -1
+    maxIndex = 0
+    for i in range(0,len(songs)):
+        if songs[i].votes > maxVotes:
+            maxVotes = songs[i].votes
+            maxIndex = i
+        songs[i].votes = 0
+    users = user_list
+    for i in range(0, len(users)):
+        users.voted = False
+    returnSong = songs.pop(maxIndex)
+    newData = {'song_url', returnSong.url}
+    return jsonify(newData)
