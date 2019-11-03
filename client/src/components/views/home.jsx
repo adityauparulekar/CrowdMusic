@@ -12,7 +12,7 @@ export default class Home extends Component {
       const room_id = JSON.parse(xhr.responseText).result.room_id;
       document.cookie = "room="+ room_id;
       // document.cookie+= "=username=" + username;
-      window.location.href="http://localhost:3000/room";
+      window.location.href="http://localhost:3000/host";
     }
   }
   componentDidMount() {
@@ -38,7 +38,6 @@ export default class Home extends Component {
     }).bind(this);
     xhr.send(null);
   }
-  
   join(e) {
     const create_url = "http://localhost:5000/join_room";
     e.preventDefault();
