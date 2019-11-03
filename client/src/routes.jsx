@@ -1,13 +1,13 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './components/App';
-import Room from './components/room';
-// import Contact from './components/views/contact';
+import App from './components/app';
+import Home from './components/views/home';
+import Room from './components/views/room';
 
 export default (
   <Route path='/' component={App}>
-    <IndexRoute component={Room} />
-    {/* <Route path='contact' component={Contact} /> */}
-    <Route path='*' component={Home} />
+    <IndexRoute component={Home} />
+    <Route path='room' component={Room} />
+    {/* <Route path='*' component={Home} /> */}
   </Route>
 );
