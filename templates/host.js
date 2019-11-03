@@ -3,6 +3,7 @@ function getCurrentSong() {
 }
 
 function getHostName() {
+	console.log("trying to get host name")
     document.write("hostName");
 }
 
