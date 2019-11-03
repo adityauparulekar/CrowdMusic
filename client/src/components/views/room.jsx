@@ -66,7 +66,7 @@ export default class Room extends Component {
       </div>
       <form className="add_song-form">
         <input type="song_text" placeholder="Song Name" id="add_song" />
-        <button onClick="____()">Add To Queue</button>
+        <button onClick={(e) => addsong(e)}>Add To Queue</button>
       </form>
 
     </div>
@@ -75,4 +75,29 @@ export default class Room extends Component {
   </div>
     );
   }
+}
+
+function addsong(e) {
+  const song_url = "http://localhost:5000/add_song";//CHANGE URL TO WHATEVER
+  e.preventDefault();
+  const value = document.getElementById("add_song").value;
+  console.log(value);
+  //const username = document.getElementById("create_username").value;
+  console.log(username);
+  const xhr = new XMLHttpRequest();
+  // console.log(http);
+  xhr.open("POST", song_url); // false for synchronous request
+  xhr.onload = function (e) {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+        const response = JSON.parse(xhr.responseText);
+      } else {
+        console.error(xhr.statusText);
+      }
+    }
+  };
+  xhr.send(JSON.stringify({
+    song: value,
+  }));
 }
