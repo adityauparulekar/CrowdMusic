@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../stylesheets/App.css';
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function App() {
 function create(e) {
   const create_url = "http://localhost:5000/create_room";
   e.preventDefault();
-  const username = document.getElementById("create_username").value;
+  //const username = document.getElementById("create_username").value;
   // console.log(username);
   const xhr = new XMLHttpRequest();
   // console.log(http);
