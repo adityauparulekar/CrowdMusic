@@ -1,0 +1,139 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+.host-page {
+  width: auto;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.header {
+  font-family: "Roboto", sans-serif;
+  font-size: 72px;
+  margin: 50px;
+  color: #d1f2ff;
+  text-shadow: 5px 5px 5px black;
+  text-align: center;
+}
+
+.room_details {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  margin: 20px;
+  color: #d1f2ff;
+  text-shadow: 5px 5px 5px black;
+  text-align: center;
+}
+
+.video {
+  position:fixed;
+  right: 50%;
+
+}
+.SongQ {
+  position: relative;
+  height: 26%;
+  width: 50%;
+  z-index: 1;
+  border-radius: 25px;
+  top: 25%;
+  background: #013220;
+  max-width: auto;
+  margin: 0 auto 100px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.song {
+  position: fixed;
+  height: 26%;
+  width: 50%;
+  z-index: 1;
+  border-radius: 25px;
+  top: 25%;
+  background: #013220;
+  max-width: 360px;
+  margin: 0 auto auto;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.q {
+  left: 5%;
+  top: 10%;
+  height: 75%;
+  width: 50%;
+  /* background-color: #338037; */
+  background: linear-gradient(30deg, #245e51, #338037);
+  overflow: scroll;
+}
+.cs {
+  right: 5%;
+  top: 10%;
+  height: 35%;
+  width: 50%;
+  background: linear-gradient(-30deg, #245e51, #338037);
+  overflow: scroll;
+}
+
+.add {
+  right: 5%;
+  top: 55%;
+  height: 30%;
+  background: linear-gradient(-30deg, #245e51, #338037);
+}
+
+.song_text {
+  font-family: "Roboto", sans-serif;
+  margin: 0 0 20px;
+  color: #FFFFFF;
+}
+
+.song input {
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.song button {
+  border-radius: 25px;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #4CAF50;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.song button:hover,.form button:active,.form button:focus {
+  background: #013220;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #013220, #182e45);
+  background: -moz-linear-gradient(right, #013220, #182e45);
+  background: -o-linear-gradient(right, #013220, #182e45);
+  background: linear-gradient(to left, #013220, #182e45);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}

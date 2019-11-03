@@ -201,7 +201,7 @@ def get_song():
 
 # implemented
 # tested
-@app.route('/song_queue', methods = ['GET'])
+@app.route('/song_queue', methods = ['POST'])
 def song_queue():
     data = request.json
     if not data['room_id'] in rooms:

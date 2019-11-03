@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <title>
+    HOST
+  </title>
+  <div className="header"> HOST </div>
+  <div className="room_details"> Room Host: </div>
+  <div className="room_details"> <script>getHostName()</script> </div>
+  <div className="room_details"> Your Name: </div>
+  <div className="room_details"> <script>getUserName()</script> </div>
+  <link href="../static/host.css" rel="stylesheet" type="text/css"/>
+  <script type="text/javascript" src="host.js"></script>
+  <div className="host-page">
+
+    <div className="song cs">
+      <div className="song_text">
+        CURRENT SONG
+      </div>
+      <div className="song_text">
+        <script>getCurrentSong()</script>
+      </div>
+    </div>
+
+    <iframe className = "video" width="50" height="50" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" frameborder="0" allow="autoplay"></iframe>
+
+    </script>
+    <div className="song q">
+      <div className="song_text">
+        SONG QUEUE
+      </div>
+    </div>
+    
+    <div className="song add">
+      <div className="song_text">
+        ADD SONG
+      </div>
+      <form className="add_song-form">
+        <input type="song_text" placeholder="Song Name" id="add_song" />
+        <button onClick="requestSong()">Add To Queue</button>
+      </form>
+
+    </div>
+
+  </div>
+</html>
