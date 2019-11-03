@@ -6,11 +6,8 @@ import string
 
 import os
 
-import google_auth_oauthlib.flow
-import googleapiclient.discovery
+from googleapiclient.discovery import build
 import googleapiclient.errors
-
-scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 
 def get_url(song):
     # Disable OAuthlib's HTTPS verification when running locally.
@@ -19,23 +16,26 @@ def get_url(song):
 
     api_service_name = "youtube"
     api_version = "v3"
-    client_secrets_file = "YOUR_CLIENT_SECRET_FILE.json"
+    client_secrets_file = "credentials.json"
 
-    # Get credentials and create an API client
-    flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
-        client_secrets_file, scopes)
-    credentials = flow.run_console()
+    with open(client_secrets_file, 'r') as f:
+        cred_dict = json.load(f)
+
     youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, credentials=credentials)
+        api_service_name, api_version, developerKey=cred_dict['api-key'])
 
     request = youtube.search().list(
         part="snippet",
         maxResults=1,
         q=song
     )
-    response = request.execute()
+    data = request.execute()
+    
+    for search in data["items"]:
+        if(search["id"]["kind"] == 'youtube#video'):
+            return f'https://www.youtube.com/embed/{search["id"]["videoId"]}?&autoplay=1'
 
-    return response.url
+    return None
 
 class Room:
     """ Room Representation """
@@ -74,7 +74,6 @@ rooms = {}
 # tested
 def generate_room_id():
     """ Generate Unique ID for room """
-    return "AAAAAA"
     id_length = 6
     while True:
         id_tmp = ''.join(random.SystemRandom().choice(
