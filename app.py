@@ -145,10 +145,12 @@ def get_url(song):
     data = request.execute()
 
     curr_id = ""
+    curr_name = ""
     
     for search in data["items"]:
         if(search["id"]["kind"] == 'youtube#video'):
             curr_id = search["id"]["videoId"]
+            curr_name = search["snippet"]["title"]
             break
     
     next_url = f"https://www.googleapis.com/youtube/v3/videos?id={curr_id}&key={cred_dict['api-key']}&part=contentDetails"
@@ -156,7 +158,7 @@ def get_url(song):
 
     dur = isodate.parse_duration(data['contentDetails']['duration'])
 
-    return (f'https://www.youtube.com/embed/{curr_id}?&autoplay=1', int(dur.total_seconds()))
+    return (f'https://www.youtube.com/embed/{curr_id}?&autoplay=1', int(dur.total_seconds()), curr_name)
 
 # implemented
 # tested
@@ -168,11 +170,11 @@ def add_song():
     room = rooms[data['room_id']]
     song_name = data['song_name']
     #query spotify/youtube to find url
-    (url, duration) = get_url(song_name)
+    (url, duration, real_name) = get_url(song_name)
     for song in room.song_queue:
         if song_name == song.name or url == song.url:
             return jsonify({'error': 'repeat song'})
-    new_song = Song(song_name, url, duration)
+    new_song = Song(real_name, url, duration)
     room.song_queue.append(new_song)
     room.numSongs += 1
     return jsonify({'error': 'none'})
