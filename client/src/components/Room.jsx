@@ -1,9 +1,9 @@
 import React from 'react';
 import '../stylesheets/App.css';
 
-function App() {
+function Room() {
   return (
-    <div className="app">
+    <div className="Room">
     <title>
       Login
     </title>
@@ -63,4 +63,4 @@ function create(e) {
 function join(e) {
   e.preventDefault();
 }
-export default App;
+export default Room;
