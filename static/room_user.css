@@ -12,17 +12,26 @@
   text-shadow: 5px 5px 5px black;
   text-align: center;
 }
+
+.room_details {
+  font-family: "Roboto", sans-serif;
+  font-size: 24px;
+  margin: 20px;
+  color: #d1f2ff;
+  text-shadow: 5px 5px 5px black;
+  text-align: center;
+}
 .SongQ {
-  position: fixed;
+  position: relative;
   height: 26%;
   width: 50%;
   z-index: 1;
   border-radius: 25px;
   top: 25%;
   background: #013220;
-  max-width: 350px;
+  max-width: auto;
   margin: 0 auto 100px;
-  padding: 45px;
+  padding: 15px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -35,9 +44,9 @@
   border-radius: 25px;
   top: 25%;
   background: #013220;
-  max-width: 350px;
-  margin: 0 auto 100px;
-  padding: 15px;
+  max-width: 360px;
+  margin: 0 auto auto;
+  padding: 10px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
@@ -46,20 +55,22 @@
   left: 5%;
   top: 10%;
   height: 75%;
+  width: 50%;
   /* background-color: #338037; */
   background: linear-gradient(30deg, #245e51, #338037);
 
 }
 .cs {
   right: 5%;
-  bottom: 90%;
-  height: 10%;
+  top: 10%;
+  height: 35%;
+  width: 50%;
   background: linear-gradient(-30deg, #245e51, #338037);
 }
 
 .add {
   right: 5%;
-  top: 50%;
+  top: 55%;
   height: 30%;
   background: linear-gradient(-30deg, #245e51, #338037);
 }
@@ -71,7 +82,7 @@
 }
 
 .song input {
-  border-radius: 5px;
+  border-radius: 25px;
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -98,7 +109,7 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
-.split button:hover,.form button:active,.form button:focus {
+.song button:hover,.form button:active,.form button:focus {
   background: #013220;
 }
 
