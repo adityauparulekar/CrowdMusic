@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, send_from_directory, session, jsonify, request
 
+# MAKE SURE TO pip3 install -r requirements.txt
+
 import json
 import random
 import string
@@ -8,34 +10,6 @@ import os
 
 from googleapiclient.discovery import build
 import googleapiclient.errors
-
-def get_url(song):
-    # Disable OAuthlib's HTTPS verification when running locally.
-    # *DO NOT* leave this option enabled in production.
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-
-    api_service_name = "youtube"
-    api_version = "v3"
-    client_secrets_file = "credentials.json"
-
-    with open(client_secrets_file, 'r') as f:
-        cred_dict = json.load(f)
-
-    youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, developerKey=cred_dict['api-key'])
-
-    request = youtube.search().list(
-        part="snippet",
-        maxResults=1,
-        q=song
-    )
-    data = request.execute()
-    
-    for search in data["items"]:
-        if(search["id"]["kind"] == 'youtube#video'):
-            return f'https://www.youtube.com/embed/{search["id"]["videoId"]}?&autoplay=1'
-
-    return None
 
 class Room:
     """ Room Representation """
@@ -143,9 +117,34 @@ def song_vote():
     
     return jsonify({'error': 'none'})
 
-### NOT IMPLEMENTED
-def getUrl(song_name):
-    return song_name + ": url is supposed to be here"
+# implemented
+def get_url(song):
+    # Disable OAuthlib's HTTPS verification when running locally.
+    # *DO NOT* leave this option enabled in production.
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+    api_service_name = "youtube"
+    api_version = "v3"
+    client_secrets_file = "credentials.json"
+
+    with open(client_secrets_file, 'r') as f:
+        cred_dict = json.load(f)
+
+    youtube = googleapiclient.discovery.build(
+        api_service_name, api_version, developerKey=cred_dict['api-key'])
+
+    request = youtube.search().list(
+        part="snippet",
+        maxResults=1,
+        q=song
+    )
+    data = request.execute()
+    
+    for search in data["items"]:
+        if(search["id"]["kind"] == 'youtube#video'):
+            return f'https://www.youtube.com/embed/{search["id"]["videoId"]}?&autoplay=1'
+
+    return None
 
 # implemented
 # tested
@@ -157,7 +156,7 @@ def add_song():
     room = rooms[data['room_id']]
     song_name = data['song_name']
     #query spotify/youtube to find url
-    url = getUrl(song_name)
+    url = get_url(song_name)
     for song in room.song_queue:
         if song_name == song.name or url == song.url:
             return jsonify({'error': 'repeat song'})
