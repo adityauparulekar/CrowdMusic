@@ -196,7 +196,7 @@ def get_song():
         songs[i].user_voted = []
     returnSong = songs.pop(maxIndex)
     room.numSongs -= 1
-    newData = {'song_url' : returnSong.url}
+    newData = {'song_url' : returnSong.url, 'duration' : returnSong.duration }
     return jsonify(newData)
 
 # implemented
