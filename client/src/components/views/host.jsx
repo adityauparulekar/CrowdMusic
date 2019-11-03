@@ -33,6 +33,75 @@ export default class Host extends Component {
       song_name: song,
     }));
   }
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      const url = "http://localhost:5000/song_queue";
+      this.setState({ time: Date.now() });
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", url); // false for synchronous request
+      xhr.onload = (function (e) {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText);
+          const response = JSON.parse(xhr.responseText);
+          this.song_queue = response.result;
+        } else {
+          console.error(xhr.statusText);
+        }
+      }
+    }).bind(this);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    console.log(this.room_id);
+    xhr.send(JSON.stringify({
+      room_id: this.room_id,
+    }));
+    this.rando();
+    }, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  rando() {
+    var songs = this.song_queue;
+
+    var ul = document.getElementById("YOLOSWAGGINS");
+    while(ul.firstChild) {
+      ul.removeChild(ul.firstChild);
+    }
+    console.log(ul);
+    for (var i = 0; i < songs.length; i++) {
+      var topping = songs[i];
+
+      var listItem = document.createElement("button");
+      listItem.textContent = topping[0] + ": " + topping[1];
+      listItem.onclick = (function() {
+        const url = "http://localhost:5000/song_vote";
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.onload = (function(e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              if (response.error !== "none") {
+                alert(response.error);
+              }
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        }).bind(this);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        const data = {
+          room_id: this.room_id,
+          username: this.username,
+          song_name: topping[0],
+        }
+        console.log(data);
+        xhr.send(JSON.stringify(data));
+      }).bind(this);
+      ul.appendChild(listItem);
+    }
+  }
   render() {
       return (
       <div className="Host">
@@ -57,7 +126,7 @@ export default class Host extends Component {
 
     <iframe className = "video" width="50" height="50" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" frameborder="0" allow="autoplay"></iframe>
     <div className="song q">
-      <div className="song_text">
+      <div className="song_text" id="YOLOSWAGGINS">
         SONG QUEUE
       </div>
     </div>

@@ -74,7 +74,31 @@ export default class Room extends Component {
 
       var listItem = document.createElement("button");
       listItem.textContent = topping[0] + ": " + topping[1];
-
+      listItem.onclick = (function() {
+        const url = "http://localhost:5000/song_vote";
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", url);
+        xhr.onload = (function(e) {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              if (response.error !== "none") {
+                alert(response.error);
+              }
+            } else {
+              console.error(xhr.statusText);
+            }
+          }
+        }).bind(this);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        const data = {
+          room_id: this.room_id,
+          username: this.username,
+          song_name: topping[0],
+        }
+        console.log(data);
+        xhr.send(JSON.stringify(data));
+      }).bind(this);
       ul.appendChild(listItem);
     }
   }
