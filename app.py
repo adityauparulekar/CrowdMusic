@@ -8,6 +8,9 @@ import string
 
 import os
 
+import isodate
+import requests
+
 from googleapiclient.discovery import build
 import googleapiclient.errors
 
@@ -35,11 +38,12 @@ class User:
 class Song:
     """" Song Representation """
 
-    def __init__(self, name, url):
+    def __init__(self, name, url, dur):
         self.name = name
         self.url = url
         self.votes = 0
         self.user_voted = []
+        self.duration = dur
 
 
 app = Flask(__name__)
@@ -139,12 +143,20 @@ def get_url(song):
         q=song
     )
     data = request.execute()
+
+    curr_id = ""
     
     for search in data["items"]:
         if(search["id"]["kind"] == 'youtube#video'):
-            return f'https://www.youtube.com/embed/{search["id"]["videoId"]}?&autoplay=1'
+            curr_id = search["id"]["videoId"]
+            break
+    
+    next_url = f"https://www.googleapis.com/youtube/v3/videos?id={curr_id}&key={cred_dict['api-key']}&part=contentDetails"
+    data = requests.get(next_url).json()["items"][0]
 
-    return None
+    dur = isodate.parse_duration(data['contentDetails']['duration'])
+
+    return (f'https://www.youtube.com/embed/{curr_id}?&autoplay=1', int(dur.total_seconds()))
 
 # implemented
 # tested
@@ -156,11 +168,11 @@ def add_song():
     room = rooms[data['room_id']]
     song_name = data['song_name']
     #query spotify/youtube to find url
-    url = get_url(song_name)
+    (url, duration) = get_url(song_name)
     for song in room.song_queue:
         if song_name == song.name or url == song.url:
             return jsonify({'error': 'repeat song'})
-    new_song = Song(song_name, url)
+    new_song = Song(song_name, url, duration)
     room.song_queue.append(new_song)
     room.numSongs += 1
     return jsonify({'error': 'none'})
