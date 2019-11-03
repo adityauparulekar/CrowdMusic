@@ -20,7 +20,7 @@ export default class Room extends Component {
     xhr.onload = function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log(xhr.responseText);
+          console.log("ASDASDASDDASDASD" + xhr.responseText);
           const response = JSON.parse(xhr.responseText);
         } else {
           console.error(xhr.statusText);

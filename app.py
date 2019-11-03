@@ -177,7 +177,7 @@ def add_song():
     room.numSongs += 1
     return jsonify({'error': 'none'})
 
-@app.route('/get_song', methods = ['GET'])
+@app.route('/get_song', methods = ['POST'])
 def get_song():
     data = request.json
     if not data['room_id'] in rooms:

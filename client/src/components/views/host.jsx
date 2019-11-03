@@ -7,6 +7,9 @@ export default class Host extends Component {
     const room = document.cookie.split(/[=;]/);
     this.room_id = room[1];
     this.username=room[3];
+    this.count = 0;
+    this.duration = 15;
+    this.songurl = "https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1";
   }
   addsong(e) {
     const song_url = "http://localhost:5000/add_song";//CHANGE URL TO WHATEVER
@@ -35,6 +38,33 @@ export default class Host extends Component {
   }
   componentDidMount() {
     this.interval = setInterval(() => {
+        this.count += 1;
+        this.setState({ time: Date.now() });
+        if (this.count > this.duration) {
+            const url = "http://localhost:5000/get_song";
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", url); // false for synchronous request
+            xhr.onload = (function (e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log(xhr.responseText);
+                    const response = JSON.parse(xhr.responseText);
+                    this.duration = response.duration;
+                    this.count = 0;
+                    this.songurl = response.song_url;
+                    console.log("ASDASDASDASDASDASDASD" + this.songurl);
+                    this.updateVid();
+                } else {
+                    console.error(xhr.statusText);
+                }
+            }
+            }).bind(this);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            console.log(this.room_id);
+            xhr.send(JSON.stringify({
+                room_id: this.room_id,
+            }));
+        }
       const url = "http://localhost:5000/song_queue";
       this.setState({ time: Date.now() });
       const xhr = new XMLHttpRequest();
@@ -60,6 +90,10 @@ export default class Host extends Component {
   }
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+  updateVid() {
+    var vid = document.getElementById("VIDBITCH");
+    vid.src = this.songurl;
   }
   rando() {
     var songs = this.song_queue;
@@ -118,13 +152,12 @@ export default class Host extends Component {
     <div className="song cs">
       <div className="song_text">
         CURRENT SONG
+        
       </div>
-      <div className="song_text">
-        <script>getCurrentSong()</script>
-      </div>
+      <iframe className = "video" width="500" height="500" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" frameborder="0" allow="autoplay" id="VIDBITCH"></iframe>
+
     </div>
 
-    <iframe className = "video" width="50" height="50" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" frameborder="0" allow="autoplay"></iframe>
     <div className="song q">
       <div className="song_text" id="YOLOSWAGGINS">
         SONG QUEUE
