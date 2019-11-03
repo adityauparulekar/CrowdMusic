@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: auto;
+  width: 360px;
   padding: 8% 0 0;
   margin: auto;
 }
@@ -9,7 +9,7 @@
   font-family: "Roboto", sans-serif;
   font-size: 72px;
   margin: 50px;
-  color: #d1f2ff;
+  color: #dcffdc;
   text-shadow: 5px 5px 5px black;
   text-align: center;
 }
@@ -21,7 +21,7 @@
   border-radius: 25px;
   top: 25%;
   background: #FFFFFF;
-  max-width: 350px;
+  max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;

@@ -1,6 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-.login-page {
+.room_user-page {
   width: auto;
   padding: 8% 0 0;
   margin: auto;
@@ -13,14 +12,14 @@
   text-shadow: 5px 5px 5px black;
   text-align: center;
 }
-.split {
+.SongQ {
   position: fixed;
   height: 26%;
   width: 50%;
   z-index: 1;
   border-radius: 25px;
   top: 25%;
-  background: #FFFFFF;
+  background: #013220;
   max-width: 350px;
   margin: 0 auto 100px;
   padding: 45px;
@@ -28,31 +27,50 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.text {
+.song {
+  position: fixed;
+  height: 26%;
+  width: 50%;
+  z-index: 1;
+  border-radius: 25px;
+  top: 25%;
+  background: #013220;
+  max-width: 350px;
+  margin: 0 auto 100px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.q {
+  left: 5%;
+  top: 10%;
+  height: 75%;
+  /* background-color: #338037; */
+  background: linear-gradient(30deg, #245e51, #338037);
+
+}
+.cs {
+  right: 5%;
+  bottom: 90%;
+  height: 10%;
+  background: linear-gradient(-30deg, #245e51, #338037);
+}
+
+.add {
+  right: 5%;
+  top: 50%;
+  height: 30%;
+  background: linear-gradient(-30deg, #245e51, #338037);
+}
+
+.song_text {
   font-family: "Roboto", sans-serif;
   margin: 0 0 20px;
   color: #FFFFFF;
 }
 
-.left {
-  left: 15%;
-  /* background-color: #338037; */
-  background: linear-gradient(30deg, #245e51, #338037);
-
-}
-.right {
-  right: 15%;
-  background: linear-gradient(-30deg, #245e51, #338037);
-}
-
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-.split input {
+.song input {
   border-radius: 5px;
   font-family: "Roboto", sans-serif;
   outline: 0;
@@ -65,7 +83,7 @@
   font-size: 14px;
 }
 
-.split button {
+.song button {
   border-radius: 25px;
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
@@ -83,50 +101,13 @@
 .split button:hover,.form button:active,.form button:focus {
   background: #013220;
 }
-.split .message {
-  margin: 15px 0 0;
-  color: #b3b3b3;
-  font-size: 12px;
-}
-.form .message a {
-  color: #4CAF50;
-  text-decoration: none;
-}
-.form .register-form {
-  display: none;
-}
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {
-  margin: 50px auto;
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-}
-.container .info h1 {
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {
-  color: #EF3B3A;
 }
 body {
   background: #76b852; /* fallback for old browsers */
