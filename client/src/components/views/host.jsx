@@ -5,6 +5,7 @@ export default class Host extends Component {
   constructor(props) {
     super(props);
     const room = document.cookie.split(/[=;]/);
+    console.log(room);
     this.room_id = room[1];
     this.username=room[3];
     this.count = 0;
@@ -92,7 +93,7 @@ export default class Host extends Component {
     clearInterval(this.interval);
   }
   updateVid() {
-    var vid = document.getElementById("VIDBITCH");
+    var vid = document.getElementById("VIDEO");
     vid.src = this.songurl;
   }
   rando() {
@@ -143,9 +144,9 @@ export default class Host extends Component {
     HOST
   </title>
   <div className="header"> HOST </div>
-  <div className="room_details"> Room Host: </div>
+  <div className="room_details"> Room ID: {this.room_id}</div>
   <div className="room_details"> <script>getHostName()</script> </div>
-  <div className="room_details"> Your Name: </div>
+  <div className="room_details"> Your Name: {this.username}</div>
   <div className="room_details"> <script>getUserName()</script> </div>
   <div className="host-page">
 
@@ -154,8 +155,7 @@ export default class Host extends Component {
         CURRENT SONG
         
       </div>
-      <iframe className = "video" width="500" height="500" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" frameborder="0" allow="autoplay" id="VIDBITCH"></iframe>
-
+      <iframe className = "video" width="1" height="1" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" align="center" frameborder="0" allow="autoplay" id="VIDEO"></iframe>
     </div>
 
     <div className="song q">

@@ -7,11 +7,11 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleOnload = (event, xhr) => {
+    this.handleOnload = (event, xhr, username) => {
       console.log(xhr.responseText);
       const room_id = JSON.parse(xhr.responseText).result.room_id;
       document.cookie = "room="+ room_id;
-      // document.cookie+= "=username=" + username;
+      document.cookie+= "=username=" + username;
       window.location.href="http://localhost:3000/host";
     }
   }
@@ -30,7 +30,7 @@ export default class Home extends Component {
     xhr.onload = (function (e) {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          this.handleOnload(e, xhr)
+          this.handleOnload(e, xhr, username)
         } else {
           console.error(xhr.statusText);
         }

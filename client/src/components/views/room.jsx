@@ -73,6 +73,7 @@ export default class Room extends Component {
       var topping = songs[i];
 
       var listItem = document.createElement("button");
+      console.log("TOPPING" + topping);
       listItem.textContent = topping[0] + ": " + topping[1];
       listItem.onclick = (function() {
         const url = "http://localhost:5000/song_vote";
