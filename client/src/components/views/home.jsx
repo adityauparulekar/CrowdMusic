@@ -77,7 +77,7 @@ export default class Home extends Component {
         Login
       </title>
     <div className="header">
-      Crowd Music
+      JukeCloud
     </div>
     {/* <link href="../../stylesheets/app.scss" rel="stylesheet" type="text/css" /> */}
     {/* <script type="text/javascript" src="../../templates/login.js"></script> */}

@@ -9,7 +9,7 @@ export default class Host extends Component {
     this.room_id = room[1];
     this.username=room[3];
     this.count = 0;
-    this.duration = 15;
+    this.duration = 30;
     this.songurl = "https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1";
   }
   addsong(e) {
@@ -155,7 +155,7 @@ export default class Host extends Component {
         CURRENT SONG
         
       </div>
-      <iframe className = "video" width="1" height="1" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=1" align="center" frameborder="0" allow="autoplay" id="VIDEO"></iframe>
+      <iframe className = "video" width="20" height="20" src="https://www.youtube.com/embed/JohcbfO0OjA?&autoplay=0" align="center" frameborder="0" allow="autoplay" id="VIDEO"></iframe>
     </div>
 
     <div className="song q">
